@@ -1,6 +1,22 @@
 import TablePagination from "./TablePagination";
+import {useDispatch, useSelector} from "react-redux";
+import {LOAD_PEOPLE} from "../redux/reducers/people/actions";
+import {selectPeople} from "../redux/reducers/people/selectors";
 
 export default function (props) {
+
+    const people = useSelector(selectPeople);
+
+    const dispatch = useDispatch();
+
+    const changePage = newPage => dispatch({
+        type: LOAD_PEOPLE,
+        payload: {
+            page: newPage,
+            search: people.search
+        }
+    })
+
     return (
         <>
             <table>
@@ -15,7 +31,7 @@ export default function (props) {
                 </tr>
                 </thead>
                 <tbody>
-                {props.people?.data?.results.map(p => {
+                {people?.data?.results.map(p => {
                     return (
                         <tr key={p.name}>
                             <td>{p.name}</td>
@@ -30,11 +46,9 @@ export default function (props) {
                 </tbody>
             </table>
             <TablePagination
-                page={props.people.page}
-                total={props.people.data.count}
-                onChange={(currentPage) => {
-                    console.log('Current page: ', currentPage)
-                }}
+                page={people.page}
+                total={people.data.count}
+                onChange={changePage}
             />
         </>
     )

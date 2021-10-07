@@ -1,4 +1,4 @@
-import {call, apply, put, takeEvery, take, select, fork} from "redux-saga/effects";
+import {call, apply, put, takeLatest, take, select, fork} from "redux-saga/effects";
 import {LOAD_PEOPLE, LOAD_PEOPLE_SUCCESS} from "../../reducers/people/actions";
 import {LOCATION_CHANGE} from "connected-react-router";
 import {selectPeople} from "../../reducers/people/selectors";
@@ -35,5 +35,5 @@ export function* fetchPeopleOnRoute() {
 
 export default function* peopleSaga() {
     yield fork(fetchPeopleOnRoute);
-    yield takeEvery(LOAD_PEOPLE, fetchPeopleList);
+    yield takeLatest(LOAD_PEOPLE, fetchPeopleList);
 }

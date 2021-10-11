@@ -4,8 +4,8 @@ const initialState = {
     page: 1,
     search: '',
     loading: false,
-    error: null,
-    data: null
+    data: null,
+    error: null
 }
 
 export default function peopleReducer(state = initialState, action) {
@@ -23,7 +23,8 @@ export default function peopleReducer(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                data: action.payload
+                data: action.payload,
+                error: null
             }
         }
         case LOAD_PEOPLE_FAILURE: {

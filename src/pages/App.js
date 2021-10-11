@@ -1,25 +1,17 @@
-import {useSelector} from "react-redux";
-import {selectPeople} from "../redux/reducers/people/selectors";
 import Table from "../components/Table";
+import TableSearch from "../components/TableSearch";
+import TablePagination from "../components/TablePagination";
+import Header from "../components/Header";
 
-function App() {
+import styles from '../styles.module.css';
 
-    const people = useSelector(selectPeople);
-
-    console.log(people);
-
+export default function App() {
     return (
-        <div className="App">
-            <p>STAR WARS UI</p>
-            {people.loading ? (
-                <div>
-                    Loading...
-                </div>
-            ) : (
-                <Table people={people}/>
-            )}
+        <div className={styles.app}>
+            <Header/>
+            <TableSearch/>
+            <Table/>
+            <TablePagination/>
         </div>
     );
 }
-
-export default App;
